@@ -1,0 +1,19 @@
+function [DPCM_code] = DPCM(data, coeffs)
+%DPCM Summary of this function goes here
+%Input : data N * 3
+%        
+    coeffs = [ 1/8, 3/8, 2/1];
+    N = length(data(:));
+    DPCM_code = zeros(1, N);
+    DPCM_code(1 : 3) = data(1 : 3);
+    preData = zeros(1, N);
+    preData(1 : 3) = data(1 : 3);
+    resData = zeros(1, N);
+    for n = 4:N
+        preData(n) = coeffs(3) * preData(n - 1) + coeffs(2) * preData(n - 2) + ...,
+                            coeffs(1) * preData(n - 3);
+        resData(n) = data(n) - preData(n);
+    end
+    
+end
+
